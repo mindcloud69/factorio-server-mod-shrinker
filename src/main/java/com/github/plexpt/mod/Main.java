@@ -41,15 +41,15 @@ public class Main {
     private static void shrunk(boolean delete) {
         String jarPath = getJarPath();
         List<String> files = getFiles(jarPath);
-        log.info("处理目录：" + jarPath);
-        log.info("文件数：" + files.size());
+        log.info("Processing Directories：" + jarPath);
+        log.info("Number of files：" + files.size());
 
         for (String file : files) {
             if (!file.endsWith(".zip")) {
-                log.info("跳过：" + file);
+                log.info("jump over：" + file);
                 continue;
             }
-            log.info("开始处理：" + file);
+            log.info("Start processing：" + file);
             final File zip = new File(file);
             final List<String> names = new ArrayList();
 
@@ -63,14 +63,14 @@ public class Main {
                     }
                     if (name.contains(".git")) {
 
-                        log.warn("GIT目录不应该存在 " + name);
+                        log.warn("GIT directory should not exist " + name);
                     }
                 }
             });
             if (delete) {
                 ZipUtil.removeEntries(zip, names.toArray(new String[0]));
-                log.info("添加 " + names);
-                log.info("删除 " + file);
+                log.info("Add to " + names);
+                log.info("delete " + file);
             }
         }
     }
